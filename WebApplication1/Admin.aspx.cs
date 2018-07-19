@@ -72,82 +72,63 @@ namespace WebApplication1
         {
           propertyList=  adminObj.viewProp(ddlState.SelectedItem.ToString(), ddlCity.SelectedItem.ToString()).ToList();
             gridView1.DataSource = propertyList;
-            //foreach (TableRow row in gridView1.Rows)
-            //{
-            //    TableCell btnCell = new TableCell();
 
-            //    Button btn = new Button();
-            //    btn.Text = "Delete";
-            //    //btn.Click += new EventHandler(BtnDelete_Click);
-            //    btn.Click += (s, RoutedEventArgs) => { Edit1(s, e, ); };
-            //    btnCell.Controls.Add(btn);
-
-            //    row.Cells.Add(btnCell);
-            //}
             gridView1.DataBind();
         }
 
-        public void Edit1(object sender, EventArgs e, string propId)
-        {
-            Response.Write("<script>alert('data added to cart :" + propId + "');</script>");
-            Session["PropId"] = propId;
-            Response.Redirect("EditProperty.aspx");
-        }
       
 
         protected void btnSearchBySeller_Click(object sender, EventArgs e)
         {
+            //Seller typeSellerId = (Seller)cmbOwnerId.SelectedItem;
+
+
+           int sellerId = sellerObj.GetSellerId(ddlSellerName.SelectedItem.ToString());
+            
+            gridView1.DataSource = adminObj.viewPropbyOwner(sellerId, ddlPropOption.SelectedItem.ToString()).ToList();
+
+            gridView1.DataBind();
 
         }
 
-        protected void gridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //List<string> columnValues = gridView1.Rows.Cast<GridViewRow>().Select(a => a.Cells[0].Text).ToList();
 
-            GridViewRow row = gridView1.SelectedRow;
-            string id = row.Cells[0].Text;
 
-            Response.Write("<script>alert('data added to cart :" + id + "');</script>");
-        }
 
-        protected void gridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Delete")
-            {
-                //Determine the RowIndex of the Row whose Button was clicked.
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
-
-                //Reference the GridView Row.
-                GridViewRow row = gridView1.Rows[rowIndex];
-
-                //Fetch value of Name.
-                string id = (row.FindControl("prop") as TextBox).Text;
-
-                //Fetch value of Country
-                // string country = row.Cells[1].Text;
-
-                Response.Write("<script>alert('data added to cart :" + id + "');</script>");
-            }
-        }
 
         protected void gridView1_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
+
+            if (e.CommandName == "Activate")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                Property prop = (Property)sellerObj.GetProp(id);
+                prop.Status_Description = "Property is Activated";
+
+                sellerObj.UpdateProperty(prop);
+                adminObj.verifyProperty(id, true);
+            }
+            if (e.CommandName == "DeActivate")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                Property prop = (Property)sellerObj.GetProp(id);
+                prop.Status_Description = "Property is De-Activated";
+
+                sellerObj.UpdateProperty(prop);
+                adminObj.verifyProperty(id, false);
+            }
+            if (e.CommandName == "DeleteProperty")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                Property prop = (Property)sellerObj.GetProp(id);
+
+                prop.Status_Description = "Property Deleted";
+                sellerObj.UpdateProperty(prop);
+                adminObj.verifyProperty(id, null);
+            }
             
-        }
-
-        protected void gridView1_RowEditing(object sender, GridViewEditEventArgs e)
-        {
 
         }
 
-        protected void gridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-
-        }
-
-        protected void gridView1_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

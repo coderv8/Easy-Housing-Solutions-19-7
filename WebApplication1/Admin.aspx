@@ -39,15 +39,15 @@
             <td style="width: 80%; vertical-align: top">
                 <%--<asp:ContentPlaceHolder ID="cphLnDBody" runat="server"></asp:ContentPlaceHolder>--%>
                
-    <asp:GridView ID="gridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="gridView1_RowCommand1" OnRowDeleting="gridView1_RowDeleting" Width="1063px" OnSelectedIndexChanged="gridView1_SelectedIndexChanged1">
+    <asp:GridView ID="gridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="gridView1_RowCommand1">
         <Columns>
-            <asp:TemplateField HeaderText="Id" ItemStyle-Width="150">
+            <%--<asp:TemplateField HeaderText="Id" ItemStyle-Width="150">
             <ItemTemplate>
                 <asp:TextBox ID="prop" runat="server" Text='<%# Eval("PropertyId") %>' />
             </ItemTemplate>
 
 <ItemStyle Width="150px"></ItemStyle>
-        </asp:TemplateField>
+        </asp:TemplateField>--%>
             <asp:BoundField DataField="PropertyName" HeaderText="PropertyName" SortExpression="PropertyName" />
             <asp:BoundField DataField="PropertyType" HeaderText="PropertyType" SortExpression="PropertyType" />
             <asp:BoundField DataField="PropertyOption" HeaderText="PropertyOption" SortExpression="PropertyOption" />
@@ -57,8 +57,24 @@
             <asp:BoundField DataField="InitialDeposit" HeaderText="InitialDeposit" SortExpression="InitialDeposit" />
             <asp:BoundField DataField="Landmark" HeaderText="Landmark" SortExpression="Landmark" />
             <asp:BoundField DataField="Status_Description" HeaderText="Status_Description" SortExpression="Status_Description" />
-            <asp:ButtonField CommandName="Activate" HeaderText="Activate" ShowHeader="True" Text="Activate" />
-        
+           <asp:TemplateField ShowHeader="False">
+            <ItemTemplate>
+                <asp:Button ID="btnActivate" runat="server" CausesValidation="false" CommandName="Activate"
+                    Text="Activate" CommandArgument='<%# Eval("PropertyId") %>' />
+            </ItemTemplate>
+        </asp:TemplateField>
+             <asp:TemplateField ShowHeader="False">
+            <ItemTemplate>
+                <asp:Button ID="btnDeActivate" runat="server" CausesValidation="false" CommandName="DeActivate"
+                    Text="DeActivate" CommandArgument='<%# Eval("PropertyId") %>' />
+            </ItemTemplate>
+        </asp:TemplateField>
+             <asp:TemplateField ShowHeader="False">
+            <ItemTemplate>
+                <asp:Button ID="btnDeleteProp" runat="server" CausesValidation="false" CommandName="DeleteProperty"
+                    Text="DeleteProperty" CommandArgument='<%# Eval("PropertyId") %>' />
+            </ItemTemplate>
+        </asp:TemplateField>
         </Columns>
                 </asp:GridView>
 
