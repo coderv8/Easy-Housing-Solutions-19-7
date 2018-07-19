@@ -47,15 +47,15 @@
                     <asp:Button ID="btnVerifiedProp" Text="Verified" runat="server" ForeColor="White" BackColor="Gray" class="btn btn-default" Width="50%" Height="40px" OnClick="btnVerifiedProp_Click" />
                 </div>
                 <div class="form-group">
-                     <asp:Button ID="btnDeactivatedProp" Text="Deactivated" runat="server" ForeColor="White" BackColor="Gray" class="btn btn-default" Width="50%" Height="40px" />
+                     <asp:Button ID="btnDeactivatedProp" Text="Deactivated" runat="server" ForeColor="White" BackColor="Gray"  class="btn btn-default" Width="50%" Height="40px" OnClick="btnDeactivatedProp_Click"/>
                 </div>
 
                 <div class="form-group">
-                     <asp:Button ID="btnAllProp" runat="server" Text="Show All" ForeColor="White" BackColor="Gray"   class="btn btn-default" Width="50%" Height="40px"  />
+                     <asp:Button ID="btnAllProp" runat="server" Text="Show All" ForeColor="White" BackColor="Gray"   class="btn btn-default" Width="50%" Height="40px" OnClick="btnAllProp_Click1" />
                 </div>
 
                 <div class="form-group">
-                    <asp:Button ID="btnAddProp" runat="server" Text="Add Property" BackColor="Green" ForeColor="White"  class="btn btn-default" Width="50%" Height="40px" />
+                    <asp:Button ID="btnAddProp" runat="server" Text="Add Property" BackColor="Green" ForeColor="White"  class="btn btn-default" Width="50%" Height="40px" OnClick="btnAddProp_Click" />
                 </div>
                 <%--<div class="form-group">
                     <asp:HyperLink ID="hlEdit" Text="Edit property" runat="server" NavigateUrl="~/EditProperty.aspx"></asp:HyperLink>

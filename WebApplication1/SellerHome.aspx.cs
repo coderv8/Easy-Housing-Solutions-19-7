@@ -16,6 +16,7 @@ namespace WebApplication1
         SellerValidations sellerObj = new SellerValidations();
         int sellerId = 0;
         List<Property> propertyList = new List<Property>();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userId"] == null)
@@ -32,6 +33,7 @@ namespace WebApplication1
             {
                 allProp();
                 DisplayProperties(sender, e);
+               
             }
         }
 
@@ -39,13 +41,10 @@ namespace WebApplication1
         /// Load Controls on OnInit event  
         /// </summary>  
         /// <param name="e"></param>  
-        protected override void OnInit(EventArgs e)
+        override protected void OnInit(EventArgs e)
         {
-
-        //override protected void OnInit(EventArgs e)
-        //{
-        BuyerValidations buyerValidationObj = new BuyerValidations();
-
+            BuyerValidations buyerValidationObj = new BuyerValidations();
+            
             if (propertyList == null)
                 Response.Write("<script>alert('There are no properties to be displayed');</script>");
 
@@ -113,27 +112,26 @@ namespace WebApplication1
 
                 //button..
                 string propertyId = k.PropertyId.ToString();
-                var btnAddcart = new Button
-                {
-                    ID = "btnClick" + propertyId,
-                    Text = "Edit",
-                    //  CssClass = "col-md-2 btn btn-info"
-                };
+                HyperLink hyp = new HyperLink();
+                hyp.ID = "hypABD";
+                hyp.Text = "redirect";
+                hyp.NavigateUrl = "EditProperty.aspx?propId=" + propertyId ;
+                //Session["PropId"] = propertyId;
+                //btnAddcart.Click += new EventHandler(this.btnAddcart_Click);
 
-                btnAddcart.Click += (s, RoutedEventArgs) => { ConfirmCart(s, e, propertyId); };
 
-                // GetDataItem owner details..
+                //  btnAddcart.Click += (s, RoutedEventArgs) => { Edit(propertyId); };
+                // Edit.Click += (se, ev) => this.Edit(se, ev, propertyId);
 
-              
-                // Adding all the childs to div
                 bodydiv.Controls.Add(div);
-                bodydiv.Controls.Add(btnAddcart);
-               
-
+                bodydiv.Controls.Add(hyp);
 
                 // After adding all the childs..
                 bodydiv.Controls.Add(new LiteralControl("<br /><br/>"));
+              
+               // base.OnInit(e);
             }
+
         }
 
         protected void DisplayProperties(object sender, EventArgs e)
@@ -141,27 +139,41 @@ namespace WebApplication1
             // Response.Write("<script>alert('page refreshed :" + "data" + "');</script>");
             OnInit(e);
         }
-        private void ConfirmCart(object sender, EventArgs e, string propertyId)
+
+        //private void ConfirmCart(object sender, EventArgs e, string propertyId)
+        //{
+           
+        //    Response.Write("<script>alert('data added to cart :" + propertyId + "');</script>");
+        //    Session["PropId"] = propertyId;
+        //    Response.Redirect("EditProperty.aspx");
+        //   //  Response.Write("<script>alert('data added to cart :" + data + "');</script>");
+        //}
+
+            public void Edit1(object sender, EventArgs e,string propId)
         {
-            Response.Write("<script>alert('data added to cart :" + propertyId + "');</script>");
-            Session["PropId"] = propertyId;
+            Response.Write("<script>alert('data added to cart :" + propId + "');</script>");
+           // Session["PropId"] = propId;
             Response.Redirect("EditProperty.aspx");
-           //  Response.Write("<script>alert('data added to cart :" + data + "');</script>");
         }
 
 
         protected void btnVerifiedProp_Click(object sender, EventArgs e)
         {
+
             propertyList = sellerObj.viewProp(sellerId, true);
-            DisplayProperties(sender,e);
+            // EventArgs ea = new EventArgs();
+
+            DisplayProperties(sender, e);
+            
+           
         }
 
         protected void btnDeactivatedProp_Click(object sender, EventArgs e)
         {
             bool? b = null;
             propertyList = sellerObj.viewProp(sellerId, b);
-
-            OnInit(e);
+            //  Response.Write("<script>alert('Deactivate');</script>");
+            DisplayProperties(sender, e);
         }
 
         protected void btnAllProp_Click(object sender, EventArgs e)
@@ -176,14 +188,13 @@ namespace WebApplication1
 
         protected void btnAddProp_Click(object sender, EventArgs e)
         {
-
             Response.Redirect("PostProperty.aspx");
         }
 
         protected void btnAllProp_Click1(object sender, EventArgs e)
         {
             allProp();
-            OnInit(e);
+            DisplayProperties(sender, e);
         }
     }
 }

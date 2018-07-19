@@ -16,7 +16,8 @@ namespace WebApplication1
         int propId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-           propId=int.Parse( Session["PropId"].ToString());
+            
+            
             if (Session["userId"] == null)
             {
                 Response.Redirect("Login.aspx");
@@ -26,6 +27,7 @@ namespace WebApplication1
             Master.Signup = false;
             Master.Profile = true;
             Master.lbl_Profile = Session["userName"].ToString();
+            propId = int.Parse(Request.QueryString["propId"]);
             if (!IsPostBack)
             {
                 prp = sellerObj.GetProp(propId);
