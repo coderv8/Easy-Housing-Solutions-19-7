@@ -188,6 +188,7 @@
     <Content Include="Account\Web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\home_back.jpeg" />
+    <Content Include="Images\validations.txt" />
     <Content Include="Login.aspx" />
     <Content Include="PostProperty.aspx" />
     <Content Include="sample.aspx" />

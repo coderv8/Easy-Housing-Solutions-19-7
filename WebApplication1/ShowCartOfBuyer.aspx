@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ShowCartOfBuyer.aspx.cs" Inherits="WebApplication1.ShowCartOfBuyer" %>
 <%@ MasterType VirtualPath="~/Site.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <meta charset="utf-8">
+       <meta charset="utf-8">
   
    
 

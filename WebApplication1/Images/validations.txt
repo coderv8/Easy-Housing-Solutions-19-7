@@ -1,0 +1,818 @@
+//---------------Post Property
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PostProperty.aspx.cs" Inherits="WebApplication1.PostProperty" %>
+<%@ MasterType VirtualPath="~/Site.Master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="container">
+          
+                <Legend>Add New Property</Legend>
+        <br />
+        <br />
+                <div class="form-group">
+                    <label for="txtPropName" class="col-sm-3 control-label">Property Name</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtPropName" runat="server" class="form-control" placeholder="Property Name"></asp:TextBox>
+                        <%--<input type="text" id="firstName" placeholder="Full Name" class="form-control" autofocus>--%>
+                        <%--<span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>--%>
+                    </div>
+                    <div class="col-sm-12">
+                         <asp:RequiredFieldValidator ID="rfvPropName" runat="server" ControlToValidate="txtPropName" Display="Dynamic" Text=" * Please Enter Property name" ForeColor="Red"></asp:RequiredFieldValidator>
+                         <asp:RegularExpressionValidator runat="server" id="rexPropName" controltovalidate="txtPropName" Display="Dynamic" validationexpression="^[a-zA-Z'.\s]{1,20}" ForeColor="Red" errormessage="Property Name should be only Alphabets and maximum of 20 letters!" />
+                    </div>
+                </div>
+                <br />
+               <br />
+                 <div class="form-group">
+                    <label class="control-label col-sm-3">Property Type</label>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyType" ID="rdbFlat" runat="server" Text="Flat" Checked="true" />
+                                    <%--<input type="radio" id="femaleRadio" value="Female">Female--%>
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyType" ID="rdbOffice" runat="server" Text="Office"  />
+                                   <%-- <input type="radio" id="maleRadio" value="Male">Male--%>
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyType" ID="rdbVilla" runat="server" Text="Villa"  />
+                                    <%--<input type="radio" id="uncknownRadio" value="Unknown">Unknown--%>
+                                </label>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div> <!-- /.form-group -->
+                <br />
+           <br />
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Property Option</label>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyOption" ID="rdbSell" runat="server" Text="Sell" AutoPostBack="true" Checked="true" OnCheckedChanged="rdbSell_CheckedChanged" />
+                                    <%--<input type="radio" id="femaleRadio" value="Female">Female--%>
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyOption" ID="rdbRent" runat="server" Text="Rent" AutoPostBack="true" OnCheckedChanged="rdbRent_CheckedChanged1" />
+                                   <%-- <input type="radio" id="maleRadio" value="Male">Male--%>
+                                </label>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div> <!-- /.form-group -->
+                <br />
+                <br />
+                <div class="form-group">
+                    <label for="txtAddress" class="col-sm-3 control-label">Address</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox TextMode="MultiLine" ID="txtAddress" runat="server" class="form-control" placeholder="Address"></asp:TextBox>
+                        <%--<input type="email" id="email" placeholder="Email" class="form-control">--%>
+                    </div>
+                    <div class="col-sm-12">
+                  <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ControlToValidate="txtAddress" Text=" * Please Enter Address" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" id="rexAddress" Controltovalidate="txtAddress" Display="Dynamic" validationexpression="[0-9a-zA-Z #,-]{1,50}" ForeColor="Red" errormessage="Address should be maximum of 50 letters!" />
+              </div>
+                </div>
+                <br />   <br />
+        <br />
+                <div class="form-group">
+                    <label for="txtLandMark" class="col-sm-3 control-label">LandMark</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtLandMark" runat="server" class="form-control" placeholder="Landmark"></asp:TextBox>
+                        <%--<input type="password" id="password" placeholder="Password" class="form-control">--%>
+                    </div>
+                    <div class="col-sm-12">
+                         <asp:RequiredFieldValidator ID="rfvLandMark" runat="server" ControlToValidate="txtLandMark" Display="Dynamic" Text=" * Please Enter LandMark" ForeColor="Red"></asp:RequiredFieldValidator>
+                         <asp:RegularExpressionValidator runat="server" id="rexLandMark" controltovalidate="txtLandMark" Display="Dynamic" validationexpression="^[a-zA-Z'.\s]{1,20}" ForeColor="Red" errormessage="LandMark should be only Alphabets and maximum of 20 letters!" />
+                    </div>
+                </div>
+               <br />   <br />
+                <div class="form-group">
+                    <label for="ddlState" class="col-sm-3 control-label">State</label>
+                    <div class="col-sm-2">
+                <asp:DropDownList runat="server" Class="form-control" ID="ddlState"  placeholder="State" AutoPostBack="True" OnSelectedIndexChanged="ddlState_SelectedIndexChanged"  ></asp:DropDownList>
+            </div>
+                </div>
+                <br />   <br />
+                <div class="form-group">
+                    <label for="ddlCity" class="col-sm-3 control-label">City</label>
+            <div class="col-sm-2">
+                <asp:DropDownList runat="server" Class="form-control" ID="ddlCity"  placeholder="City" AutoPostBack="True"   > </asp:DropDownList>
+              <%--<input type="text" name="state" placeholder="State" class="form-control">--%>
+            </div>
+                    </div>
+                  <br />
+                <br />
+            <div class="form-group">
+                    <label for="txtAddress" class="col-sm-3 control-label">Initial Deposit</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtInitialDeposit" Enabled="false" runat="server" class="form-control" placeholder="Initial Deposit"></asp:TextBox>
+                        <%--<input type="email" id="email" placeholder="Email" class="form-control">--%>
+                    </div>
+                <div class="col-sm-12">
+                    <asp:RequiredFieldValidator ID="rfvInitialDeposit" Enabled="true" runat="server" ControlToValidate="txtInitialDeposit" Display="Dynamic" Text=" * Please Enter Initial Deposit" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RangeValidator runat="server" id="rngInitialDeposit" Enabled="true" controltovalidate="txtInitialDeposit" type="Currency" minimumvalue="5000" maximumvalue="10000" ForeColor="Red" errormessage="Initial Deposit should be between 5000 to 10000!" />
+                </div>
+            </div>
+                <br />
+           <br />
+            <div class="form-group">
+                    <label for="txtPriceRange" class="col-sm-3 control-label">Price Range</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtPriceRange" runat="server" class="form-control" placeholder="Price Range"></asp:TextBox>
+                        <%--<input type="email" id="email" placeholder="Email" class="form-control">--%>
+                    </div>
+                <div class="col-sm-12">
+                    <asp:RequiredFieldValidator ID="rfvPriceRange" runat="server" ControlToValidate="txtPriceRange" Display="Dynamic" Text=" * Please Enter Initial Deposit" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RangeValidator runat="server" id="rngPriceRange" controltovalidate="txtPriceRange" type="Currency" minimumvalue="10000" maximumvalue="50000" ForeColor="Red" errormessage="Price Range should be between 10000 to 50000!" />
+                </div>
+            </div>
+
+
+        <br />
+        <br />
+        <div class="form-group">
+                    <label for="txtDesc" class="col-sm-3 control-label">Description</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox TextMode="MultiLine" ID="txtDesc" runat="server" class="form-control" placeholder="Description"></asp:TextBox>
+                        <%--<input type="email" id="email" placeholder="Email" class="form-control">--%>
+                    </div>
+                    <div class="col-sm-12">
+                         <asp:RegularExpressionValidator runat="server" id="rexDescription" Controltovalidate="txtDesc" Display="Dynamic" validationexpression="[0-9a-zA-Z #,-]{1,50}" ForeColor="Red" errormessage="Description should be maximum of 50 letters!" />
+                    </div>
+                </div>
+                <br />
+           <br />   <br />   
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <asp:Button ID="btnRegister" class="btn btn-primary btn-block" runat="server" Text="Register" OnClick="btnRegister_Click" />
+                       <%-- <button type="submit" class="btn btn-primary btn-block">Register</button>--%>
+                    </div>
+                </div>
+     
+        </div> <!-- ./container -->
+</asp:Content>
+
+
+//------------------------Post Property.cs
+
+
+using EasyHousingSolutions_BLL;
+using EasyHousingSolutions_Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication1
+{
+    public partial class PostProperty : System.Web.UI.Page
+    {
+        SellerValidations sellerObj = new SellerValidations();
+        List<State> states = null;
+        List<City> cities = null;
+        static int stateId = 1;
+        static int cityId = 1;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (Session["userId"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            Master.Logout = true;
+            Master.Login = false;
+            Master.Signup = false;
+            Master.Profile = true;
+            Master.lbl_Profile = Session["userName"].ToString();
+
+            states = sellerObj.GetStates();
+            cities = sellerObj.GetCities(stateId);
+            if (!IsPostBack)
+            {
+                ddlState.DataTextField = "StateName";
+                ddlState.DataValueField = "StateName";
+                ddlState.DataSource = states;
+                ddlState.SelectedIndex = 0;
+                ddlState.DataBind();
+
+                ddlCity.DataSource = cities;
+                ddlCity.SelectedIndex = 0;
+                ddlCity.DataValueField = "CityName";
+                ddlCity.DataBind();
+            }
+
+        }
+        protected void ddlState_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                State state = states[ddlState.SelectedIndex];
+                stateId = state.StateId;
+                cities = sellerObj.GetCities(stateId);
+                ddlCity.DataSource = cities;
+                ddlCity.SelectedIndex = 0;
+                ddlCity.DataValueField = "CityName";
+                ddlCity.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        protected void rdbSell_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbSell.Checked == true)
+            {
+                txtInitialDeposit.Enabled =false;
+                rfvInitialDeposit.Enabled = false;
+                rngInitialDeposit.Enabled = false;
+            }
+        }
+
+        //protected void rdbRent_CheckedChanged(object sender, EventArgs e)
+        //{
+           
+                
+        //}
+
+
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            SellerValidations sellerObj = new SellerValidations();
+            Property addProperty = new Property();
+            decimal deposit = 0;
+            int userId = int.Parse(Session["userId"].ToString());
+
+            addProperty.SellerId = userId;
+            addProperty.PropertyName = txtPropName.Text;
+
+            string propType = " ";
+            if (rdbFlat.Checked == true)
+                propType = "Flat";
+            else if (rdbOffice.Checked == true)
+                propType = "Office";
+            else
+                propType = "Villa";
+
+            addProperty.PropertyType = propType;
+
+            string propOption = "";
+            if (rdbRent.Checked == true)
+                propOption = "Rent";
+            else
+            {
+                propOption = "Sell";
+               
+            }
+                
+
+            addProperty.PropertyOption = propOption;
+
+            addProperty.Address = txtAddress.Text;
+            addProperty.Landmark = txtLandMark.Text;
+            if(rdbSell.Checked== true)
+            {
+                
+                addProperty.InitialDeposit = deposit;
+            }
+            else
+            {
+                deposit = decimal.Parse(txtInitialDeposit.Text);
+                addProperty.InitialDeposit = deposit;
+            }
+            
+            addProperty.PriceRange = decimal.Parse(txtPriceRange.Text);
+
+            State state = states[ddlState.SelectedIndex];
+            stateId = state.StateId;
+            addProperty.StateId = stateId;
+
+            City city = cities[ddlCity.SelectedIndex];
+            cityId = city.CityId;
+            addProperty.CityId = cityId;
+            addProperty.Description = txtDesc.Text;
+            sellerObj.AddProperty(addProperty);
+
+            Response.Redirect("SellerHome.aspx");
+
+        }
+
+        protected void rdbRent_CheckedChanged1(object sender, EventArgs e)
+        {
+            if (rdbRent.Checked == true)
+            {
+                txtInitialDeposit.Enabled = true;
+            }
+        }
+    }
+}
+
+
+
+//--------------------Buyer Registration
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BuyerRegistration.aspx.cs" Inherits="WebApplication1.BuyerRegistration" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+     <div  class="row vertical-center-row">
+    <div class="col-md-8 col-md-offset-1">
+       <legend style="font-size:40px">Buyer Registration</legend>
+        <fieldset>
+
+          <!-- Form Name -->
+            
+            
+
+          <legend>Personal Information</legend>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name" class="form-control"></asp:TextBox>
+             <%-- <input type="text" name="fistName" placeholder="First Name" class="form-control">--%>
+            </div>
+              <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" ControlToValidate="txtFirstName" Display="Dynamic" Text=" * Please Enter First name" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" id="rexFirstName" controltovalidate="txtFirstName" Display="Dynamic" validationexpression="^[a-zA-Z'.\s]{1,20}" errormessage="First Name should be only Alphabets and maximum of 20 letters!" />
+              </div>
+           
+           
+          </div>
+            <br />
+            <div class="form-group">
+                 <div class="col-sm-4">
+                <asp:TextBox ID="txtLastName" runat="server" placeholder="Last Name" class="form-control"></asp:TextBox>
+              <%--<input type="text" name="lastName" placeholder="Last Name" class="form-control">--%>
+            </div>
+               <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="rfvLastName" runat="server" ControlToValidate="txtLastName" Text=" * Please Enter Last name" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" id="rexLastName" controltovalidate="txtLastName" Display="Dynamic" validationexpression="^[a-zA-Z'.\s]{1,20}" errormessage="Last Name should be only Alphabets and maximum of 20 letters!" />
+                  </div>
+            </div>
+            <br />
+            <br />
+         
+          <!-- Text input-->
+          <div class="form-group">
+            <div class="col-sm-4">
+               
+                <asp:TextBox ID="txtDOB" runat="server" placeholder="Date Of Birth" class="form-control" TextMode="Date"></asp:TextBox>
+              <%--<input type="date" placeholder="Date Of Birth" class="form-control">--%>
+            </div>
+              <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="refDOB" runat="server" ControlToValidate="txtDOB" Display="Dynamic" Text=" * Please Enter Date of Birth" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:CompareValidator ErrorMessage="(mm/dd/yyyy)" Display="Dynamic" ID="valcDate" ControlToValidate="txtDOB" Operator="DataTypeCheck" Type="Date" runat="server"></asp:CompareValidator>       
+                <asp:RangeValidator ID="valrDate" runat="server" ControlToValidate="txtDOB" MinimumValue="12/31/1950" MaximumValue="1/1/2100" Type="Date" text="Invalid Date" Display="Dynamic"/>
+              </div>
+          </div>
+
+          <!-- Text input-->
+          
+          
+
+<!-- Address Section -->
+          <!-- Form Name -->
+            <br />
+            <br />
+            
+         
+          <legend>User Details</legend>
+          <!-- Text input-->
+          <div class="form-group">
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtUserName" Text="" runat="server" placeholder="User Name" class="form-control"></asp:TextBox>
+             <%-- <input type="text" name="pFistName" placeholder="User Name" class="form-control">--%>
+            </div>
+              <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="rfvUser" runat="server" Display="Dynamic" ControlToValidate="txtUserName" Text="* Please provide user name" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" id="rexUserName"  Controltovalidate="txtUserName" Display="Dynamic" validationexpression="[A-Za-z0-9]{6,15}" errormessage="User Name should be Minimum 6 and Maximum 15 characters!" />
+              </div>
+             </div>
+            <br />
+            <br />
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <asp:TextBox ID="txtPassword" Text="" TextMode="Password" runat="server" placeholder="Password" class="form-control"></asp:TextBox>
+                    <%--<input type="text" name="pFistName" placeholder="Password" class="form-control">--%>
+                </div>
+
+                <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="rfvPwd" runat="server" Display="Dynamic" ControlToValidate="txtPassword" Text="* Please provide password" ForeColor="Red"></asp:RequiredFieldValidator>
+                  <asp:RegularExpressionValidator ID="rexPassword" runat="server" Display="Dynamic" ControlToValidate="txtPassword" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$" ErrorMessage="Minimum 8 characters atleast 1 Alphabet, 1 Number and 1 Special Character"  />
+
+                </div>
+            </div>
+
+            
+             <%-- <div class="col-sm-4"></div>--%>
+         
+          <br />
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <asp:TextBox ID="txtPhoneNo"  runat="server"  placeholder="Phone No" class="form-control"></asp:TextBox>
+                    <%--<input type="pPhoneNbr" placeholder="Phone Number" class="form-control">--%>
+                </div>
+                <div class="col-sm-5">
+                    <asp:RequiredFieldValidator ID="rfvPhoneNo" runat="server" Display="Dynamic" ControlToValidate="txtPhoneNo" Text="* Please provide PhoneNo" ForeColor="Red" ></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Display="Dynamic"  ControlToValidate="txtPhoneNo" ErrorMessage="Phone No must be only 10 digits and should start with 6,7,8 or 9!" ValidationExpression="[6-9][0-9]{9}"></asp:RegularExpressionValidator>  
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="form-control"></asp:TextBox>
+                    <%--<input type="email" name="pEmail" placeholder="Email" class="form-control">--%>
+                </div>
+                <div class="col-sm-5">
+                    <asp:RequiredFieldValidator Display="Dynamic" ID="rfvEmail" runat="server" ControlToValidate="txtEmail" Text="* Please provide Email" ForeColor="Red" ></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="rexEmail" Display="Dynamic" runat="server" ErrorMessage="Please Enter Valid Email ID " ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"> </asp:RegularExpressionValidator>
+                </div>
+
+            </div>
+            
+            <br />
+            <br />
+            <br />
+            <br />
+          <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-1">
+              <div class="pull-right">
+                  <asp:Button ID="btnSubmit" runat="server" class="btn btn-primary" Text="Save" OnClick="btnSubmit_Click"/>
+                   <asp:Button ID="btnCancel" runat="server" class="btn btn-default" Text="Cancel" OnClick="btnCancel_Click"/>
+                <%--<button type="submit" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>--%>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+  
+    </div><!-- /.col-lg-12 -->
+</div><!-- /.row -->
+
+</asp:Content>
+
+
+//--------------Seller Reg
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SellerRegistration.aspx.cs" Inherits="WebApplication1.SellerRegistration" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div  class="row vertical-center-row">
+    <div class="col-md-8 col-md-offset-1">
+       <legend style="font-size:40px">Seller Registration</legend>
+        <fieldset>
+
+          <!-- Form Name -->
+            
+            
+
+          <legend>Personal Information Details</legend>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name" class="form-control"></asp:TextBox>
+                
+             <%-- <input type="text" name="fistName" placeholder="First Name" class="form-control">--%>
+            </div>
+              <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" ControlToValidate="txtFirstName" Display="Dynamic" Text=" * Please Enter First name" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" id="rexFirstName" controltovalidate="txtFirstName" Display="Dynamic" validationexpression="^[a-zA-Z'.\s]{1,20}" errormessage="First Name should be only Alphabets and maximum of 20 letters!" />
+              </div>
+           <br />
+              <br />
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtLastName" runat="server" placeholder="Last Name" class="form-control"></asp:TextBox>
+                
+              <%--<input type="text" name="lastName" placeholder="Last Name" class="form-control">--%>
+            </div>
+              <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="rfvLastName" runat="server" ControlToValidate="txtLastName" Text=" * Please Enter Last name" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" id="rexLastName" controltovalidate="txtLastName" Display="Dynamic" validationexpression="^[a-zA-Z'.\s]{1,20}" errormessage="Last Name should be only Alphabets and maximum of 20 letters!" />
+                  </div>
+          </div>
+            <br />
+            
+          <!-- Text input-->
+          <div class="form-group">
+            <div class="col-sm-4">
+               
+                <asp:TextBox ID="txtDOB" runat="server" placeholder="Date Of Birth" class="form-control" TextMode="Date"></asp:TextBox>
+               
+
+              <%--<input type="date" placeholder="Date Of Birth" class="form-control">--%>
+            </div>
+              <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="refDOB" runat="server" ControlToValidate="txtDOB" Display="Dynamic" Text=" * Please Enter Date of Birth" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:CompareValidator ErrorMessage="(mm/dd/yyyy)" Display="Dynamic"  ID="valcDate"  ControlToValidate="txtDOB" Operator="DataTypeCheck" Type="Date" runat="server"></asp:CompareValidator>       
+                <asp:RangeValidator ID="valrDate" runat="server" ControlToValidate="txtDOB"  MinimumValue="12/31/1950" MaximumValue="1/1/2100" Type="Date" text="Invalid Date" Display="Dynamic"/>
+              </div>
+          </div>
+
+          <!-- Text input-->
+          
+          
+
+<!-- Address Section -->
+          <!-- Form Name -->
+            <br />
+            <br />
+            
+                <legend>Address Details</legend>
+           
+          
+          <!-- Text input-->
+          <div class="form-group">
+            <div class="col-sm-8">
+                
+                 <asp:TextBox TextMode="MultiLine" Columns="1" Rows="2" ID="txtAddress" runat="server" placeholder="Address" class="form-control" ></asp:TextBox>
+<%--              <input type="text" name="addressLine" placeholder="Address" class="form-control">--%>
+            </div>
+              
+              <div class="col-sm-12">
+                  <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ControlToValidate="txtAddress" Text=" * Please Enter Address" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" id="rexAddress" Controltovalidate="txtAddress" Display="Dynamic" validationexpression="[0-9a-zA-Z #,-]{1,50}" errormessage="Address should be maximum of 50 letters!" />
+              </div>
+             
+          </div>
+         <br />
+          <br />
+           
+          <!-- Text input-->
+          <div class="form-group">
+            <div class="col-sm-4">
+             <asp:DropDownList runat="server" Class="form-control" ID="ddlState"  placeholder="State" AutoPostBack="True" OnSelectedIndexChanged="ddlState_SelectedIndexChanged" ></asp:DropDownList>
+            </div>
+              <br />
+          </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    
+                <asp:DropDownList runat="server" Class="form-control" ID="ddlCity"  placeholder="City" AutoPostBack="True"  > </asp:DropDownList>
+              <%--<input type="text" name="state" placeholder="State" class="form-control">--%>
+            
+                </div>
+            </div>
+<!-- Parent/Guadian Contact Section -->
+          <!-- Form Name -->
+            <br /><br />
+          <legend>User Details</legend>
+          <!-- Text input-->
+          <div class="form-group">
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtUserName" Text="" runat="server" placeholder="User Name" class="form-control"></asp:TextBox>
+             
+                <%-- <input type="text" name="pFistName" placeholder="User Name" class="form-control">--%>
+            </div>
+              <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="rfvUser" Display="Dynamic" runat="server" ControlToValidate="txtUserName" Text="* Please provide user name" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server"  id="rexUserName" Controltovalidate="txtUserName" Display="Dynamic" validationexpression="[A-Za-z0-9]{6,15}" errormessage="User Name should be Minimum 6 and Maximum 15 characters!" />
+              </div>
+            
+             <%-- <div class="col-sm-4"></div>--%>
+          </div>
+            <br />
+            <br />
+            
+            <div class="form-group">
+                <div class="col-sm-4">
+                <asp:TextBox ID="txtPassword" Text="" TextMode="Password" runat="server" placeholder="Password" class="form-control"></asp:TextBox>
+
+                              <%--<input type="text" name="pFistName" placeholder="Password" class="form-control">--%>
+            </div>
+              <div class="col-sm-5">
+                  <asp:RequiredFieldValidator ID="rfvPwd" runat="server" ControlToValidate="txtPassword" Text="* Please provide password" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="rexPassword" runat="server" ControlToValidate="txtPassword" Display="Dynamic" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$" ErrorMessage="Minimum 8 characters atleast 1 Alphabet, 1 Number and 1 Special Character"  />
+
+              </div>
+                <br />
+                <br />
+                <div class="col-sm-4">
+                <asp:TextBox ID="txtPhoneNo"  runat="server" placeholder="Phone No" class="form-control"></asp:TextBox>
+                
+              <%--<input type="pPhoneNbr" placeholder="Phone Number" class="form-control">--%>
+            </div>
+            <div class="col-sm-6">
+                <asp:RequiredFieldValidator ID="rfvPhoneNo" runat="server" Display="Dynamic" ControlToValidate="txtPhoneNo" Text="* Please provide PhoneNo" ForeColor="Red" ></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Display="Dynamic" runat="server"  ControlToValidate="txtPhoneNo" ErrorMessage="Phone No must be only 10 digits and should start with 6,7,8 or 9!" ValidationExpression="[6-9][0-9]{9}"></asp:RegularExpressionValidator>  
+            </div>
+            <br />
+                <br />
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="form-control"></asp:TextBox>
+              <%--<input type="email" name="pEmail" placeholder="Email" class="form-control">--%>
+           </div>
+            <div class="col-sm-6">
+                <asp:RequiredFieldValidator ID="rfvEmail" Display="Dynamic" runat="server" ControlToValidate="txtEmail" Text="* Please provide Email" ForeColor="Red" ></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="rexEmail" Display="Dynamic" runat="server" ErrorMessage="Please Enter Valid Email ID " ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"> </asp:RegularExpressionValidator>
+            </div>
+
+            </div>
+            
+  
+         
+            
+
+            <br />
+            <br />
+            <br />
+            <br />
+          <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-1">
+              <div class="pull-right">
+                  <asp:Button ID="btnSubmit" runat="server" class="btn btn-primary" Text="Save" OnClick="btnSubmit_Click"/>
+                   <asp:Button ID="btnCancel" runat="server" class="btn btn-default" Text="Cancel" OnClick="btnCancel_Click"/>
+                <%--<button type="submit" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>--%>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+  
+    </div><!-- /.col-lg-12 -->
+</div><!-- /.row -->
+
+
+
+   
+</asp:Content>
+
+
+//----------------------------Edit Property
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditProperty.aspx.cs" Inherits="WebApplication1.EditProperty" %>
+<%@ MasterType VirtualPath="~/Site.Master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+     <div class="container">
+          
+                <Legend>Add New Property</Legend>
+        <br />
+        <br />
+                <div class="form-group">
+                    <label for="txtPropName" class="col-sm-3 control-label">Property Name</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtPropName" runat="server" class="form-control" placeholder="Property Name"></asp:TextBox>
+                        <%--<input type="text" id="firstName" placeholder="Full Name" class="form-control" autofocus>--%>
+                        <%--<span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>--%>
+                    </div>
+                    <div class="col-sm-12">
+                         <asp:RequiredFieldValidator ID="rfvPropName" runat="server" ControlToValidate="txtPropName" Display="Dynamic" Text=" * Please Enter Property name" ForeColor="Red"></asp:RequiredFieldValidator>
+                         <asp:RegularExpressionValidator runat="server" id="rexPropName" controltovalidate="txtPropName" Display="Dynamic" validationexpression="^[a-zA-Z'.\s]{1,20}" ForeColor="Red" errormessage="Property Name should be only Alphabets and maximum of 20 letters!" />
+                    </div>
+                </div>
+                <br />
+               <br />
+                 <div class="form-group">
+                    <label class="control-label col-sm-3">Property Type</label>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyType" ID="rdbFlat" runat="server" Text="Flat"  />
+                                    <%--<input type="radio" id="femaleRadio" value="Female">Female--%>
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyType" ID="rdbOffice" runat="server" Text="Office"  />
+                                   <%-- <input type="radio" id="maleRadio" value="Male">Male--%>
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyType" ID="rdbVilla" runat="server" Text="Villa"  />
+                                    <%--<input type="radio" id="uncknownRadio" value="Unknown">Unknown--%>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- /.form-group -->
+                <br />
+           <br />
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Property Option</label>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyOption" ID="rdbSell" runat="server" Text="Sell" OnCheckedChanged="rdbSell_CheckedChanged"  />
+                                    <%--<input type="radio" id="femaleRadio" value="Female">Female--%>
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <asp:RadioButton GroupName="grpPropertyOption" ID="rdbRent" runat="server" Text="Rent"  />
+                                   <%-- <input type="radio" id="maleRadio" value="Male">Male--%>
+                                </label>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div> <!-- /.form-group -->
+                <br />
+                <br />
+                <div class="form-group">
+                    <label for="txtAddress"  class="col-sm-3 control-label">Address</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox  TextMode="MultiLine" ID="txtAddress" runat="server" class="form-control" placeholder="Address"></asp:TextBox>
+                        <%--<input type="email" id="email" placeholder="Email" class="form-control">--%>
+                    </div>
+                     <div class="col-sm-12">
+                  <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ControlToValidate="txtAddress" Text=" * Please Enter Address" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" id="rexAddress" Controltovalidate="txtAddress" Display="Dynamic" validationexpression="[0-9a-zA-Z #,-]{1,50}" ForeColor="Red" errormessage="Address should be maximum of 50 letters!" />
+              </div>
+                </div>
+                <br />   <br />
+        <br />
+                <div class="form-group">
+                    <label for="txtLandMark" class="col-sm-3 control-label">LandMark</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtLandMark" runat="server" class="form-control" placeholder="Landmark"></asp:TextBox>
+                        <%--<input type="password" id="password" placeholder="Password" class="form-control">--%>
+                    </div>
+                    <div class="col-sm-12">
+                         <asp:RequiredFieldValidator ID="rfvLandMark" runat="server" ControlToValidate="txtLandMark" Display="Dynamic" Text=" * Please Enter LandMark" ForeColor="Red"></asp:RequiredFieldValidator>
+                         <asp:RegularExpressionValidator runat="server" id="rexLandMark" controltovalidate="txtLandMark" Display="Dynamic" validationexpression="^[a-zA-Z'.\s]{1,20}" ForeColor="Red" errormessage="LandMark should be only Alphabets and maximum of 20 letters!" />
+                    </div>
+                </div>
+               <br />   <br />
+                <div class="form-group">
+                    <label for="ddlState" class="col-sm-3 control-label">State</label>
+                    <div class="col-sm-2">
+                <asp:DropDownList runat="server" Class="form-control" ID="ddlState"  placeholder="State" AutoPostBack="True" OnSelectedIndexChanged="ddlState_SelectedIndexChanged"  ></asp:DropDownList>
+            </div>
+                </div>
+                <br />   <br />
+                <div class="form-group">
+                    <label for="ddlCity" class="col-sm-3 control-label">City</label>
+            <div class="col-sm-2">
+                <asp:DropDownList runat="server" Class="form-control" ID="ddlCity"  placeholder="City" AutoPostBack="True"   > </asp:DropDownList>
+              <%--<input type="text" name="state" placeholder="State" class="form-control">--%>
+            </div>
+                    </div>
+                  <br />
+                <br />
+            <div class="form-group">
+                    <label for="txtAddress" class="col-sm-3 control-label">Initial Deposit</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtInitialDeposit" runat="server" class="form-control" placeholder="Initial Deposit"></asp:TextBox>
+                        <%--<input type="email" id="email" placeholder="Email" class="form-control">--%>
+                    </div>
+                <div class="col-sm-12">
+                    <asp:RequiredFieldValidator ID="rfvInitialDeposit" Enabled="true" runat="server" ControlToValidate="txtInitialDeposit" Display="Dynamic" Text=" * Please Enter Initial Deposit" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RangeValidator runat="server" id="rngInitialDeposit" Enabled="true" controltovalidate="txtInitialDeposit" type="Currency" minimumvalue="5000" maximumvalue="10000" ForeColor="Red" errormessage="Initial Deposit should be between 5000 to 10000!" />
+                </div>
+            </div>
+                <br />
+           <br />
+            <div class="form-group">
+                    <label for="txtPriceRange" class="col-sm-3 control-label">Price Range</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtPriceRange" runat="server" class="form-control" placeholder="Price Range"></asp:TextBox>
+                        <%--<input type="email" id="email" placeholder="Email" class="form-control">--%>
+                    </div>
+                <div class="col-sm-12">
+                    <asp:RequiredFieldValidator ID="rfvPriceRange" runat="server" ControlToValidate="txtPriceRange" Display="Dynamic" Text=" * Please Enter Initial Deposit" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RangeValidator runat="server" id="rngPriceRange" controltovalidate="txtPriceRange" type="Currency" minimumvalue="10000" maximumvalue="50000" ForeColor="Red" errormessage="Price Range should be between 10000 to 50000!" />
+                </div>
+            </div>
+
+
+        <br />
+        <br />
+        <div class="form-group">
+                    <label for="txtDesc" class="col-sm-3 control-label">Description</label>
+                    <div class="col-sm-3">
+                        <asp:TextBox TextMode="MultiLine" ID="txtDesc" runat="server" class="form-control" placeholder="Description"></asp:TextBox>
+                        <%--<input type="email" id="email" placeholder="Email" class="form-control">--%>
+                    </div>
+            <div class="col-sm-12">
+                         <asp:RegularExpressionValidator runat="server" id="rexDescription" Controltovalidate="txtDesc" Display="Dynamic" validationexpression="[0-9a-zA-Z #,-]{1,50}" ForeColor="Red" errormessage="Description should be maximum of 50 letters!" />
+                    </div>
+                </div>
+                <br />
+           <br />   <br />   
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <asp:Button ID="btnRegister" class="btn btn-primary btn-block" runat="server" Text="Register" OnClick="btnRegister_Click" />
+                       <%-- <button type="submit" class="btn btn-primary btn-block">Register</button>--%>
+                    </div>
+                </div>
+     
+        </div> <!-- ./container -->
+</asp:Content>
